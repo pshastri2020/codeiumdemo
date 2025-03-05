@@ -1,0 +1,38 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  pythonVersion: '3.9'
+
+steps:
+- task: UsePythonVersion@0
+  displayName: 'Use Python 3.9'
+  inputs:
+    version: $(pythonVersion)
+
+- task: Bash@3
+  displayName: 'Install dependencies'
+  inputs:
+    command: 'bash'
+    workingDirectory: 'flask_app/app'
+    targetType: 'inline'
+    script: |
+      pip install -r requirements.txt
+
+- task: Python@2
+  displayName: 'Test'
+  inputs:
+    command: 'test'
+    workingDirectory: 'flask_app/app'
+    testFramework: 'unittest'
+    testFiles: '**/test_function_factorial.py'
+
+- task: PublishBuildArtifact@2
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: 'flask_app/app'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
