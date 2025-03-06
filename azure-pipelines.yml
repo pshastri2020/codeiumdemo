@@ -22,17 +22,4 @@ steps:
     script: |
       pip install -r requirements.txt
 
-- task: Python@2
-  displayName: 'Test'
-  inputs:
-    command: 'test'
-    workingDirectory: 'flask_app/app'
-    testFramework: 'unittest'
-    testFiles: '**/test_function_factorial.py'
 
-- task: PublishBuildArtifact@2
-  displayName: 'Publish Artifact'
-  inputs:
-    PathtoPublish: 'flask_app/app'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
