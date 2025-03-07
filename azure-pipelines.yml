@@ -19,6 +19,14 @@ stages:
         displayName: 'Use Python 3.9'
         inputs:
           versionSpec: '$(python.version)'
+   
+      - task: CmdLine@2
+        displayName: 'List files'
+        inputs:
+          script: |
+            dir /a-D /S /B
+          workingDirectory: 'codeiumdemo'
+
       - task: PythonScript@0
         displayName: 'Install dependencies'
         inputs:
