@@ -5,21 +5,57 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  pythonVersion: '3.9'
+  python.version: '3.9'
 
-steps:
-- task: UsePythonVersion@0
-  displayName: 'Use Python 3.9'
-  inputs:
-    version: $(pythonVersion)
+stages:
+- build
+- test
 
-- task: Bash@3
-  displayName: 'Install dependencies'
-  inputs:
-    command: 'bash'
-    workinDirectory: 'codeiumdemo'
-    targetType: 'inline'
-    script: |
-      pip install -r requirements.txt
+build:
+  stage: build
+  displayName: 'Build'
+  jobs:
+  - job: build
+    displayName: 'Build'
+    steps:
+    - task: UsePythonVersion@0
+      displayName: 'Use Python 3.9'
+      inputs:
+        versionSpec: '$(python.version)'
+    - task: PythonScript@0
+      displayName: 'Install dependencies'
+      inputs:
+        command: 'install'
+        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+        arguments: '-r requirements.txt'
+    - task: PythonScript@0
+      displayName: 'Lint'
+      inputs:
+        command: 'lint'
+        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+        arguments: 'test_function_factorial.py'
 
+test:
+  stage: test
+  displayName: 'Test'
+  jobs:
+  - job: test
+    displayName: 'Test'
+    steps:
+    - task: UsePythonVersion@0
+      displayName: 'Use Python 3.9'
+      inputs:
+        versionSpec: '$(python.version)'
+    - task: PythonScript@0
+      displayName: 'Install dependencies'
+      inputs:
+        command: 'install'
+        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+        arguments: '-r requirements.txt'
+    - task: PythonScript@0
+      displayName: 'Test'
+      inputs:
+        command: 'test'
+        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+        arguments: 'test_function_factorial.py'
 
