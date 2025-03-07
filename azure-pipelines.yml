@@ -21,3 +21,14 @@ stages:
         inputs:
           targetType: 'inline'
           script: 'ls'
+          steps:
+      - task: UsePythonVersion@0
+        displayName: 'Use Python 3.9'
+        inputs:
+          versionSpec: '$(python.version)'
+      - task: PythonScript@0
+        displayName: 'Install dependencies'
+        inputs:
+          command: 'install'
+          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+          arguments: '-r requirements.txt'
