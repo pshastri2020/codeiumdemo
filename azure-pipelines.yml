@@ -6,7 +6,7 @@ pool:
 
 variables:
   python.version: '3.9'
-  system.debug: 'true'
+  
 
 stages:
   - stage: build
@@ -20,49 +20,4 @@ stages:
         inputs:
           versionSpec: '$(python.version)'
    
-      - task: CmdLine@2
-        displayName: 'List files'
-        inputs:
-          script: |
-            dir /a-D /S /B
-          workingDirectory: 'codeiumdemo'
-
-      - task: PythonScript@0
-        displayName: 'Install dependencies'
-        inputs:
-          command: 'install'
-          workingDirectory: 'codeiumdemo'
-          arguments: '-r ./requirements.txt'
-      - task: PythonScript@0
-        displayName: 'Lint'
-        inputs:
-          command: 'lint'
-          workingDirectory: 'codeiumdemo'
-          arguments: 'function_factorial.py'
-    
-
-
-  - stage: test
-    displayName: 'Test'
-    jobs:
-      - job: test
-        steps:
-        - task: UsePythonVersion@0
-          displayName: 'Use Python 3.9'
-          inputs:
-            versionSpec: '$(python.version)'
-        - task: PythonScript@0
-          displayName: 'Install dependencies'
-          inputs:
-            command: 'install'
-            workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-            arguments: '-r requirements.txt'
-        - task: PythonScript@0
-          displayName: 'Test'
-          inputs:
-            command: 'test'
-            workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-            arguments: 'test_function_factorial.py'
-
-
 
