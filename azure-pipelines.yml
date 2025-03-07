@@ -21,7 +21,7 @@ stages:
       - task: PythonScript@0
         displayName: 'Install dependencies'
         inputs:
-          command: 'install'
+          command: 'pip install'
           workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
           arguments: '-r requirements.txt'
       - task: PythonScript@0
