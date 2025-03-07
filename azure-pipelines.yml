@@ -21,9 +21,10 @@ stages:
       - task: PythonScript@0
         displayName: 'Install dependencies'
         inputs:
-          command: 'install'
-          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+          scriptSource: |
+          script: 'python install'
           arguments: '-r requirements.txt'
+          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
       - task: PythonScript@0
         displayName: 'Lint'
         inputs:
