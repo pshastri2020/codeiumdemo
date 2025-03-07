@@ -31,5 +31,5 @@ stages:
         displayName: 'Install dependencies'
         inputs:
           command: 'install'
-          workingDirectory: ''
+          workingDirectory: '$(System.DefaultWorkingDirectory)'
           arguments: '-r ./requirements.txt'
