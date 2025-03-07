@@ -31,6 +31,6 @@ stages:
       - task: PythonScript@0
         displayName: 'Install dependencies'
         inputs:
-          command: 'install'
-          workingDirectory: '$(System.DefaultWorkingDirectory)'
-          arguments: '-r ./requirements.txt'
+          command: 'pip install'
+          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+          arguments: '-r ${BUILD_SOURCESDIRECTORY}/codeiumdemo/requirements.txt'
