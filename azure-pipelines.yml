@@ -18,12 +18,11 @@ stages:
         displayName: 'Use Python 3.9'
         inputs:
          versionSpec: '$(python.version)'
-      - task: PythonScript@0
+      - script: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
         displayName: 'Install dependencies'
-        inputs:
-          command: 'install'
-          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-          arguments: -r requirements.txt
+      
       - task: PythonScript@0
         displayName: 'Lint'
         inputs:
