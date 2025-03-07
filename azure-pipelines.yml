@@ -23,6 +23,7 @@ stages:
           script: |
             pwd
             ls
+            echo $(System.DefaultWorkingDirectory)'
       - task: UsePythonVersion@0
         displayName: 'Use Python 3.9'
         inputs:
