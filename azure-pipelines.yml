@@ -31,5 +31,5 @@ stages:
         displayName: 'Install dependencies'
         inputs:
           command: 'install'
-          workingDirectory: 'codeiumdemo'
+          workingDirectory: '$(BUILD_SOURCESDIRECTORY}'
           arguments: '-r ./requirements.txt'
