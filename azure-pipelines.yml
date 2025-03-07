@@ -24,11 +24,10 @@ stages:
         displayName: 'Install dependencies'
       
       - task: PythonScript@0
-        displayName: 'Lint'
-        inputs:
-          command: 'lint'
-          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-          arguments: 'test_function_factorial.py'
+        displayName: 'Execute factorial function'
+      - script: |
+          python function_factorial.py
+      
 
   - stage: test
     displayName: 'Test'
