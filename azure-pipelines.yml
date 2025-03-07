@@ -31,5 +31,4 @@ stages:
       - task: PythonScript@0
         displayName: 'Install dependencies'
       - script: |
-          python -m pip install --upgrade pip
           pip install -r ./requirements.txt
