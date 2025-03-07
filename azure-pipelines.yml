@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   python.version: '3.9'
@@ -17,29 +17,6 @@ stages:
       - task: UsePythonVersion@0
         displayName: 'Use Python 3.9'
         inputs:
-         versionSpec: '$(python.version)'
-      - script: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-        displayName: 'Install dependencies'
-      
-      - task: PythonScript@0
-        inputs:
-          workingDirectory: '$(BUILD_SOURCESDIRECTORY}/codeiumdemo'
-        displayName: 'Execute factorial function'
-      - script: |
-          python function_factorial.py
-      
-
-  - stage: test
-    displayName: 'Test'
-    jobs:
-    - job: test
-      displayName: 'Test'
-      steps:
-      - task: UsePythonVersion@0
-        displayName: 'Use Python 3.9'
-        inputs:
           versionSpec: '$(python.version)'
       - task: PythonScript@0
         displayName: 'Install dependencies'
@@ -48,9 +25,39 @@ stages:
           workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
           arguments: '-r requirements.txt'
       - task: PythonScript@0
-        displayName: 'Test'
+        displayName: 'Lint'
         inputs:
-          command: 'test'
+          command: 'lint'
           workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-          arguments: 'test_function_factorial.py'
+          arguments: 'function_factorial.py'
+      - task: CopyFiles@2
+        displayName: 'Copy files to artifact directory'
+        inputs:
+          Contents: '**'
+          TargetFolder: '$(build.artifactstagingdirectory)'
+
+
+  - stage: test
+    displayName: 'Test'
+    jobs:
+      - job: test
+        steps:
+        - task: UsePythonVersion@0
+          displayName: 'Use Python 3.9'
+          inputs:
+            versionSpec: '$(python.version)'
+        - task: PythonScript@0
+          displayName: 'Install dependencies'
+          inputs:
+            command: 'install'
+            workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+            arguments: '-r requirements.txt'
+        - task: PythonScript@0
+          displayName: 'Test'
+          inputs:
+            command: 'test'
+            workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+            arguments: 'test_function_factorial.py'
+
+
 
