@@ -8,54 +8,49 @@ variables:
   python.version: '3.9'
 
 stages:
-- build
-- test
-
-build:
-  stage: build
-  displayName: 'Build'
-  jobs:
-  - job: build
+  - stage: build
     displayName: 'Build'
-    steps:
-    - task: UsePythonVersion@0
-      displayName: 'Use Python 3.9'
-      inputs:
-        versionSpec: '$(python.version)'
-    - task: PythonScript@0
-      displayName: 'Install dependencies'
-      inputs:
-        command: 'install'
-        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-        arguments: '-r requirements.txt'
-    - task: PythonScript@0
-      displayName: 'Lint'
-      inputs:
-        command: 'lint'
-        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-        arguments: 'test_function_factorial.py'
+    jobs:
+    - job: build
+      displayName: 'Build'
+      steps:
+      - task: UsePythonVersion@0
+        displayName: 'Use Python 3.9'
+        inputs:
+         versionSpec: '$(python.version)'
+      - task: PythonScript@0
+        displayName: 'Install dependencies'
+        inputs:
+          command: 'install'
+          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+          arguments: '-r requirements.txt'
+      - task: PythonScript@0
+        displayName: 'Lint'
+        inputs:
+          command: 'lint'
+          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+          arguments: 'test_function_factorial.py'
 
-test:
-  stage: test
-  displayName: 'Test'
-  jobs:
-  - job: test
+  - stage: test
     displayName: 'Test'
-    steps:
-    - task: UsePythonVersion@0
-      displayName: 'Use Python 3.9'
-      inputs:
-        versionSpec: '$(python.version)'
-    - task: PythonScript@0
-      displayName: 'Install dependencies'
-      inputs:
-        command: 'install'
-        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-        arguments: '-r requirements.txt'
-    - task: PythonScript@0
+    jobs:
+    - job: test
       displayName: 'Test'
-      inputs:
-        command: 'test'
-        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-        arguments: 'test_function_factorial.py'
+      steps:
+      - task: UsePythonVersion@0
+        displayName: 'Use Python 3.9'
+        inputs:
+          versionSpec: '$(python.version)'
+      - task: PythonScript@0
+        displayName: 'Install dependencies'
+        inputs:
+          command: 'install'
+          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+          arguments: '-r requirements.txt'
+      - task: PythonScript@0
+        displayName: 'Test'
+        inputs:
+          command: 'test'
+          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+          arguments: 'test_function_factorial.py'
 
