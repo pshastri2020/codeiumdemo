@@ -17,7 +17,6 @@ steps:
   displayName: 'Install dependencies'
   inputs:
     command: 'bash'
-    workingDirectory: 'codeiumdemo'
     targetType: 'inline'
     script: |
       pip install -r requirements.txt
