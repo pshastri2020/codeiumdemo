@@ -22,20 +22,16 @@ stages:
       - task: PythonScript@0
         displayName: 'Install dependencies'
         inputs:
-          command: 'pip install'
-          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-          filepath: './codeiumdemo/requirements.txt'
+          command: 'install'
+          workingDirectory: 'codeiumdemo'
+          filepath: './requirements.txt'
       - task: PythonScript@0
         displayName: 'Lint'
         inputs:
           command: 'lint'
-          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+          workingDirectory: 'codeiumdemo'
           arguments: 'function_factorial.py'
-      - task: CopyFiles@2
-        displayName: 'Copy files to artifact directory'
-        inputs:
-          Contents: '**'
-          TargetFolder: '$(build.artifactstagingdirectory)'
+    
 
 
   - stage: test
