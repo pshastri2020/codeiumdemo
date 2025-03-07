@@ -23,7 +23,7 @@ stages:
         inputs:
           command: 'pip install'
           workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-          arguments: '-r ./requirements.txt'
+          filepath: './requirements.txt'
       - task: PythonScript@0
         displayName: 'Lint'
         inputs:
