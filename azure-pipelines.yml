@@ -31,5 +31,5 @@ stages:
         displayName: 'Install dependencies'
         inputs:
           command: 'install'
-          workingDirectory: '$(BUILD_SOURCESDIRECTORY}'
+          workingDirectory: ''
           arguments: '-r ./requirements.txt'
