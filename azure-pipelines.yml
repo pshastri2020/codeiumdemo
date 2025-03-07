@@ -6,6 +6,7 @@ pool:
 
 variables:
   python.version: '3.9'
+  system.debug: 'true'
 
 stages:
   - stage: build
