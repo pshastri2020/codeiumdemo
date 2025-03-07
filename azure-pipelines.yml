@@ -32,5 +32,5 @@ stages:
         displayName: 'Install dependencies'
         inputs:
           command: 'pip install'
-          workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-          arguments: '-r ${BUILD_SOURCESDIRECTORY}/codeiumdemo/requirements.txt'
+          workingDirectory: '${System.DefaultWorkingDirectory}'
+          arguments: '-r ${System.DefaultWorkingDirectory}/requirements.txt'
