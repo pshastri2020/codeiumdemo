@@ -30,7 +30,6 @@ stages:
           versionSpec: '$(python.version)'
       - task: PythonScript@0
         displayName: 'Install dependencies'
-        inputs:
-          scriptSource: 'inline'
-          script: 'pip install'
-          arguments: '-r /home/vsts/work/1/s/requirements.txt'
+      - script: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
