@@ -27,3 +27,4 @@ stages:
             echo "$(System.DefaultWorkingDirectory)"
       - task: UsePythonVersion@0
       - script: python function_factorial.py
+      - script: python test_function_factorial.py
