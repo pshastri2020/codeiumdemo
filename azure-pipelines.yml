@@ -24,6 +24,8 @@ stages:
         displayName: 'Install dependencies'
       
       - task: PythonScript@0
+        inputs:
+          workingDirectory: '$(BUILD_SOURCESDIRECTORY}/codeiumdemo'
         displayName: 'Execute factorial function'
       - script: |
           python function_factorial.py
