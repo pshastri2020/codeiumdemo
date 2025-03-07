@@ -8,6 +8,8 @@ variables:
   python.version: '3.9'
   
 
+
+   
 stages:
   - stage: build
     displayName: 'Build'
@@ -15,9 +17,7 @@ stages:
     - job: build
       displayName: 'Build'
       steps:
-      - task: UsePythonVersion@0
-        displayName: 'Use Python 3.9'
+      - task: Bash@3
         inputs:
-          versionSpec: '$(python.version)'
-   
-
+          targetType: 'inline'
+          script: 'ls'
