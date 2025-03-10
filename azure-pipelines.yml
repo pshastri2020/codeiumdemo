@@ -22,7 +22,7 @@ stages:
       displayName: 'Install dependencies'
       inputs:
         scriptSource: 'filePath'
-        scriptPath: '${BUILD_SOURCESDIRECTORY}'
+        scriptPath: 'pip install'
         arguments: '-r ${BUILD_SOURCESDIRECTORY}/requirements.txt'
         workingDirectory: '${BUILD_SOURCESDIRECTORY}'
     - task: PythonScript@0
