@@ -30,9 +30,3 @@ stages:
         command: 'python'
         workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
         arguments: 'function_factorial.py'
-    - task: PublishBuildArtifact@2
-      displayName: 'Publish artifact'
-      inputs:
-        PathtoPublish: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-        ArtifactName: 'function_factorial'
-        publishLocation: 'Container'
