@@ -22,5 +22,5 @@ stages:
       displayName: 'Execute function_factorial.py'
       inputs:
         scriptSource: 'inline'
-        script: python function_factorial.py
+        - script: python function_factorial.py
         workingDirectory: '${BUILD_SOURCESDIRECTORY}'
