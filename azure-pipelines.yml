@@ -21,9 +21,10 @@ stages:
     - task: PythonScript@0
       displayName: 'Install dependencies'
       inputs:
-        command: 'pip install'
-        workingDirectory: '${BUILD_SOURCESDIRECTORY}'
+        scriptSource: 'filePath'
+        scriptPath: '${BUILD_SOURCESDIRECTORY}'
         arguments: '-r ${BUILD_SOURCESDIRECTORY}/requirements.txt'
+        workingDirectory: '${BUILD_SOURCESDIRECTORY}'
     - task: PythonScript@0
       displayName: 'Run function_factorial.py'
       inputs:
