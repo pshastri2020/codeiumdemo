@@ -15,9 +15,5 @@ stages:
     displayName: 'Build'
     steps:
     - task: UsePythonVersion@0
-    - task: PythonScript@0
-    - task: PythonScript@0
-      inputs:
-        scriptSource: 'inline'
-        script: 'function_factorial.py'
+    - script: ' python function_factorial.py'
   
