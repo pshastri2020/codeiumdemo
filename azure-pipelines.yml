@@ -19,15 +19,10 @@ stages:
       inputs:
         versionSpec: '$(python.version)'
     - task: PythonScript@0
-      displayName: 'Install dependencies'
-      inputs:
-        scriptSource: 'filePath'
-        scriptPath: 'pip install'
-        arguments: '-r ${BUILD_SOURCESDIRECTORY}/requirements.txt'
-        workingDirectory: '${BUILD_SOURCESDIRECTORY}'
-    - task: PythonScript@0
-      displayName: 'Run function_factorial.py'
+      displayName: 'Execute function_factorial.py'
       inputs:
         command: 'python'
-        workingDirectory: '${BUILD_SOURCESDIRECTORY}'
-        arguments: 'function_factorial.py'
+        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+        script: |
+          import function_factorial
+          print(function_factorial.function_factorial(5))
