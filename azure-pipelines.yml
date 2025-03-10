@@ -8,6 +8,6 @@ variables:
   python.version: '3.9'
 
 stages:
-  - build
-  - test
-  - deploy
+- stage: Build
+  displayName: 'Build'
+ 
