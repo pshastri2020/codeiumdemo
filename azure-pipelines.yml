@@ -15,12 +15,9 @@ stages:
     displayName: 'Build'
     steps:
     - task: UsePythonVersion@0
-      displayName: 'Use Python 3.9'
-      inputs:
-        versionSpec: '$(python.version)'
     - task: PythonScript@0
-      displayName: 'Execute function_factorial.py'
+    - task: PythonScript@0
       inputs:
         scriptSource: 'inline'
-        - script: python function_factorial.py
-        workingDirectory: '${BUILD_SOURCESDIRECTORY}'
+        script: 'function_factorial.py'
+  
