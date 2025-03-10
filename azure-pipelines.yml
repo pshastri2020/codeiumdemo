@@ -12,7 +12,27 @@ stages:
   displayName: 'Build'
   jobs:
   - job: Build
-    displayName: 'Execute Factorial code'
+    displayName: 'Build'
     steps:
-    - script: python -m pip install -r requirements.txt
-    - script: python function_factorial.py
+    - task: UsePythonVersion@0
+      displayName: 'Use Python 3.9'
+      inputs:
+        versionSpec: '$(python.version)'
+    - task: PythonScript@0
+      displayName: 'Install dependencies'
+      inputs:
+        command: 'pip install'
+        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+        arguments: '-r ${BUILD_SOURCESDIRECTORY}/codeiumdemo/requirements.txt'
+    - task: PythonScript@0
+      displayName: 'Run function_factorial.py'
+      inputs:
+        command: 'python'
+        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+        arguments: 'function_factorial.py'
+    - task: PublishBuildArtifact@2
+      displayName: 'Publish artifact'
+      inputs:
+        PathtoPublish: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+        ArtifactName: 'function_factorial'
+        publishLocation: 'Container'
