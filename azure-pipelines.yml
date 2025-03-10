@@ -22,7 +22,7 @@ stages:
       displayName: 'Execute function_factorial.py'
       inputs:
         command: 'python'
-        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+        workingDirectory: '${BUILD_SOURCESDIRECTORY}'
         script: |
           import function_factorial
           print(function_factorial.function_factorial(5))
