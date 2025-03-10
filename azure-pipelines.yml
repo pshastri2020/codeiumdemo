@@ -22,11 +22,11 @@ stages:
       displayName: 'Install dependencies'
       inputs:
         command: 'pip install'
-        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
-        arguments: '-r ${BUILD_SOURCESDIRECTORY}/codeiumdemo/requirements.txt'
+        workingDirectory: '${BUILD_SOURCESDIRECTORY}'
+        arguments: '-r ${BUILD_SOURCESDIRECTORY}/requirements.txt'
     - task: PythonScript@0
       displayName: 'Run function_factorial.py'
       inputs:
         command: 'python'
-        workingDirectory: '${BUILD_SOURCESDIRECTORY}/codeiumdemo'
+        workingDirectory: '${BUILD_SOURCESDIRECTORY}'
         arguments: 'function_factorial.py'
