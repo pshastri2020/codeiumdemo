@@ -16,3 +16,4 @@ stages:
     steps:
     - task: BuildSolution@1
       displayName: 'Build solution'
+    -script: python function_factorial.py
