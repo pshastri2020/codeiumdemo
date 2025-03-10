@@ -18,13 +18,6 @@ stages:
 
       displayName: 'Build'
       steps:
-      - task: Bash@3
-        inputs:
-          targetType: 'inline'
-          script: |
-            pwd
-            ls
-            echo "$(System.DefaultWorkingDirectory)"
       - task: UsePythonVersion@0
       - script: python function_factorial.py
       - script: python test_function_factorial.py
