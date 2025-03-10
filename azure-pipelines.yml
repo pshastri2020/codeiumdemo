@@ -10,10 +10,10 @@ variables:
 stages:
 - stage: Build
   displayName: 'Build'
- jobs:
+  jobs:
   - job: Build
     displayName: 'Build'
     steps:
     - task: BuildSolution@1
       displayName: 'Build solution'
-    -script: python function_factorial.py
+    - script: python function_factorial.py
